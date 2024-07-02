@@ -1,0 +1,5 @@
+def sum_of_multiples(n,a,b):
+    sum = 0
+    for i in range(n):
+        if (i % a == 0) or (i % b == 0): sum += i
+    return sum

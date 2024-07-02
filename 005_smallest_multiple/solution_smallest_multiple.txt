@@ -1,0 +1,37 @@
+
+
+def smallest_multiple(k): # Version 1
+    primes = get_primes(k) # list of primes <= k
+    acc_result = 1
+    for p in primes:
+        a = math.floor(math.log(k)/math.log(p)) # greatest power s.t prime^a < 10
+        acc_result *= math.pow(p,a)
+    return acc_result
+
+def smallest_multiple(k): Version 2
+    primes = get_primes(k) # list of primes <= k
+    acc_result = 1
+    limit = math.sqrt(k)
+    for p in primes:
+        a = 1
+        if p < limit:
+            a = math.floor(math.log(k)/math.log(p)) # greatest power s.t prime^a < 10
+            acc_result *= math.pow(p,a)
+        else:
+            acc_result *= math.pow(p,a) # uses initialized a = 1
+    return acc_result
+
+def get_primes(k): # used from last 005_get_primes directory
+    if k < 2:
+        return []
+    primes = []
+    is_prime = [True] * (k + 1)
+    is_prime[0] = is_prime[1] = False
+    
+    for num in range(2, k + 1):
+        if is_prime[num]:
+            primes.append(num)
+            for multiple in range(num * num, k + 1, num):
+                is_prime[multiple] = False
+    
+    return primes
